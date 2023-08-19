@@ -1,10 +1,10 @@
-# Simple Python File Mover (SPFM) (Under Active Development)
-## WARNING: Simple Python File Mover (SPFM) is currently in development beta and undergoing constant changes and fixes. It's not suggested or recommended to use this in a production environment yet.
-SPFM is a user-friendly Python program designed to streamline the process of moving files within your Windows PC.
+# Python File Mover CLI (Under Active Development)
+## WARNING: Python File Mover CLI (SPFM) is currently in development beta and undergoing constant changes and fixes. It's not suggested or recommended to use this in a production environment yet.
+Python File Mover CLI is a user-friendly Python program designed to streamline the process of moving files within your Windows PC.
 
 ## Getting Started
 
-To utilize SPFM, ensure that you have Python installed on your Windows PC. If not, you can download the latest version from the official Python website ([Python Downloads](https://www.python.org/downloads/)).
+To utilize Python File Mover CLI, ensure that you have Python installed on your Windows PC. If not, you can download the latest version from the official Python website ([Python Downloads](https://www.python.org/downloads/)).
 
 Follow these steps to get started:
 
