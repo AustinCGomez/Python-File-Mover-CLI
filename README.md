@@ -1,5 +1,5 @@
 # Python File Mover CLI (Under Active Development)
-## WARNING: Python File Mover CLI (SPFM) is currently in development beta and undergoing constant changes and fixes. It's not suggested or recommended to use this in a production environment yet.
+### WARNING: Python File Mover CLI (SPFM) is currently in beta testing and active development. Therefore, bugs are to be expected from this program at the moment.
 Python File Mover CLI is a user-friendly Python program designed to streamline the process of moving files within your Windows PC.
 
 ## Getting Started
