@@ -16,7 +16,7 @@ class CommandAndControl:
         root.withdraw()
         from_directory = filedialog.askdirectory()
         print(f"Success: We have obtained the directory: {from_directory}")
-        print("Opening a Graphical User Interface(GUI) to obtain your directory to move files FROM")
+        print("Opening a Graphical User Interface(GUI) to obtain your directory to move files TO")
         root = Tk()
         root.withdraw()
         to_directory = filedialog.askdirectory()
@@ -39,7 +39,6 @@ class CommandAndControl:
             newMove.obtain_directory()
         else:
             print("Sorry, you did not enter valid information")
-
 # The purpose of this class is to have different options for searching files.
 # The user will be able to control these options via the CommandAndControl module.
 class FileSearcher:
