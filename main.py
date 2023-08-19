@@ -40,7 +40,8 @@ class CommandAndControl:
         else:
             print("Sorry, you did not enter valid information")
 
-
+# The purpose of this class is to have different options for searching files.
+# The user will be able to control these options via the CommandAndControl module.
 class FileSearcher:
     def __init__(self):
         self.directory_from_retrievel = None
@@ -81,7 +82,7 @@ class FileSearcher:
             if entry.is_dir():
                 print(f"Folders: {entry}")
 
-
+#The purpose of this class will be to actually move the files to specific destinations
 class MoveFiles:
     def __init__(self):
         self.folder_from = None
