@@ -3,13 +3,12 @@ import shutil
 from tkinter import filedialog
 from tkinter import *
 
-class CommandAndControl: 
+class CommandAndControl:
     def __init__(self):
         self.userInput = None
         self.fromAddress = None
         self.toAddress = None
 
-    #We will obtain our directory from here and then each class can call this to retrieve it when they need it at that time. 
     @staticmethod
     def obtainDirectory():
         print("Opening a Graphical User Interface(GUI) to obtain your directory to move files FROM")
@@ -25,7 +24,7 @@ class CommandAndControl:
         return from_directory, to_directory
 
     def begin(self):
-        print("Simple Python File Mover 0.1 Alpha")
+        print("Python File Mover CLI 0.1 Alpha")
         print("OPTIONS: -s Search directory and return all files in the specific directory || -m Move files from one directory to another directory")
         self.userInput = input("Please enter your desired command here: ").lower()
         #A simple input validation approach
@@ -35,10 +34,10 @@ class CommandAndControl:
             newFileSearch.search_directory()
 
         elif self.userInput == '-m':
-            #Create new MoveFiles Object 
+            #Create new MoveFiles Object
             newMove = MoveFiles()
             newMove.obtain_directory()
-        else: 
+        else:
             print("Sorry, you did not enter valid information")
 
 
@@ -49,7 +48,7 @@ class FileSearcher:
         self.file_extensions = {}
 
     def search_directory(self):
-        self.directory_from_retrievel, self.directory_to_retrievel = CommandAndControl.obtainDirectory() 
+        self.directory_from_retrievel, self.directory_to_retrievel = CommandAndControl.obtainDirectory()
         print(self.directory_from_retrievel)
         print(self.directory_to_retrievel)
         print("Testing the static method")
@@ -75,7 +74,7 @@ class FileSearcher:
         for ext, files in self.file_extensions.items():
             print(f"Extension: {ext}")
             print('\n'.join(files))
-            print() 
+            print()
 
     def _print_entire_directories(self):
         for entry in os.scandir(self.directory_from_retrievel):
@@ -88,35 +87,30 @@ class MoveFiles:
         self.folder_from = None
         self.folder_to = None
 
-# This method will obtain the directory with the code already defined in the static method. 
+# This method will obtain the directory with the code already defined in the static method.
     def obtain_directory(self):
         self.folder_from, self.folder_to = CommandAndControl.obtainDirectory()
         MoveFiles.move_the_files(self)
 
 
-   # def display_file_extensions_in_directory(self):
-    #    file_searcher = FileSearcher()
-     #   file_searcher.directory = self.folder_selected
-      #  file_searcher.search_directory()
-
     def move_the_files(self):
         self.extension_list = []
         while True:
             self.getInput = input("Please enter each file extension that you want to move from the directory. Please type 'quit' when you are done")
-        
+
             if self.getInput == 'quit':
                 break
-                
+
             self.extension_list.append(self.getInput)
 
-        # Display the list of all of the file extensions that the user entered. 
+        # Display the list of all of the file extensions that the user entered.
         print("Here are all of the file extensions that you chose to move:")
         for extension in self.extension_list:
             print(extension)
 
         print("We will now attempt to move the files based on extension from the list given..")
-        # This will need to be modified eventually so that it can interact with the other classes to already have the directories? 
-        # this is just our path that we are going to use for testing purposes. 
+        # This will need to be modified eventually so that it can interact with the other classes to already have the directories?
+        # this is just our path that we are going to use for testing purposes.
         print("folder_from")
         print(self.folder_from)
         for file in os.listdir(self.folder_from):
@@ -126,12 +120,8 @@ class MoveFiles:
                 shutil.move(src_path, dest_path)
                 print(f"Moved {file} to {dest_path}")
                 print(f"Removed {file} in {src_path}")
-            
-                
+
+
 if __name__ == "__main__":
     BeginProgram = CommandAndControl()
     BeginProgram.begin()
-    #BeginProgram.obtainDirectory()
-    #newMover = MoveFiles()
-    #newMover.obtain_directory()
-    #newMover.move_the_files()
