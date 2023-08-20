@@ -40,6 +40,6 @@ We eagerly welcome contributions to SPFM. Should you wish to contribute a bug fi
 
 ## License
 
-SPFM operates under the MIT License. For the full license text, refer to the `LICENSE` file included within the repository.
+Python File Mover CLI operates under the MIT License. For the full license text, refer to the `LICENSE` file included within the repository.
 
 Experience the convenience of file management with SPFM—simple, efficient, and effective!
