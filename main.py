@@ -1,9 +1,13 @@
 import os
 import shutil
+import typer
 from tkinter import filedialog
 from tkinter import *
 
-class CommandAndControl:
+class MainView:
+
+    app = typer.Typer()
+
     def __init__(self):
         self.userInput = None
         self.fromAddress = None
@@ -23,22 +27,26 @@ class CommandAndControl:
         print(f"Success: We have obtained the directory: {to_directory}")
         return from_directory, to_directory
 
-    def begin(self):
-        print("Python File Mover CLI 0.1 Alpha")
-        print("OPTIONS: -s Search directory and return all files in the specific directory || -m Move files from one directory to another directory")
-        self.userInput = input("Please enter your desired command here: ").lower()
-        #A simple input validation approach
-        if self.userInput == "-s":
-            #Create new FileSearcher Object
-            newFileSearch = FileSearcher()
-            newFileSearch.search_directory()
 
-        elif self.userInput == '-m':
-            #Create new MoveFiles Object
-            newMove = MoveFiles()
-            newMove.obtain_directory()
-        else:
-            print("Sorry, you did not enter valid information")
+    @app.command()
+    def m():
+        typer.echo("Executing command --m")
+        newMove = MoveFiles()
+        newMove.obtain_directory()
+
+
+    @app.command()
+    def s():
+        typer.echo("Executing command --s")
+        #Create new FileSearcher Object
+        newFileSearch = FileSearcher()
+        newFileSearch.search_directory()
+
+    def main(self):
+        self.app()
+
+
+
 # The purpose of this class is to have different options for searching files.
 # The user will be able to control these options via the CommandAndControl module.
 class FileSearcher:
@@ -48,7 +56,7 @@ class FileSearcher:
         self.file_extensions = {}
 
     def search_directory(self):
-        self.directory_from_retrievel, self.directory_to_retrievel = CommandAndControl.obtainDirectory()
+        self.directory_from_retrievel, self.directory_to_retrievel = MainView.obtainDirectory()
         print(self.directory_from_retrievel)
         print(self.directory_to_retrievel)
         print("Testing the static method")
@@ -89,7 +97,7 @@ class MoveFiles:
 
 # This method will obtain the directory with the code already defined in the static method.
     def obtain_directory(self):
-        self.folder_from, self.folder_to = CommandAndControl.obtainDirectory()
+        self.folder_from, self.folder_to = MainView.obtainDirectory()
         MoveFiles.move_the_files(self)
 
 
@@ -123,5 +131,5 @@ class MoveFiles:
 
 
 if __name__ == "__main__":
-    BeginProgram = CommandAndControl()
-    BeginProgram.begin()
+    BeginProgram = MainView()
+    BeginProgram.main()
