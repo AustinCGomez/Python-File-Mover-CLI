@@ -1,8 +1,10 @@
 import os
 import shutil
 import typer
+import time
 from tkinter import filedialog
 from tkinter import *
+
 
 
 class MainView:
@@ -13,20 +15,6 @@ class MainView:
         self.userInput = None
         self.fromAddress = None
         self.toAddress = None
-
-    @staticmethod
-    def obtainDirectory():
-        print("Opening a Graphical User Interface(GUI) to obtain your directory to move files FROM")
-        root = Tk()
-        root.withdraw()
-        from_directory = filedialog.askdirectory()
-        print(f"Success: We have obtained the directory: {from_directory}")
-        print("Opening a Graphical User Interface(GUI) to obtain your directory to move files TO")
-        root = Tk()
-        root.withdraw()
-        to_directory = filedialog.askdirectory()
-        print(f"Success: We have obtained the directory: {to_directory}")
-        return from_directory, to_directory
 
 
     @app.command()
@@ -43,6 +31,30 @@ class MainView:
         newFileSearch = MainModel()
         newFileSearch.search_directory()
 
+
+    @staticmethod
+    def obtainDirectory():
+        print("Opening a Graphical User Interface(GUI) to obtain your directory to move files FROM")
+        root = Tk()
+        root.withdraw()
+        from_directory = filedialog.askdirectory()
+        to_directory = filedialog.askdirectory()
+        if not from_directory:
+            print("Error: You did not set any FROM Directory")
+            return None, None
+        if not to_directory:
+            print("Error: You did not set any TO Directory")
+            return None, None
+        else:
+            print(f"Success: We have obtained the directory: {from_directory}")
+            print(f"Success: We have obtained the directory: {to_directory}")
+            return from_directory, to_directory
+        root = Tk()
+        root.withdraw()
+
+
+
+
     def main(self):
         self.app()
 
@@ -53,11 +65,33 @@ class MainModel:
     def __init__(self):
         self.directory_from_retrievel = None
         self.directory_to_retrievel = None
+        self.continue_or_terminate = None
         self.file_extensions = {}
 
+
     def obtain_directory(self):
-        self.folder_from, self.folder_to = MainView.obtainDirectory()
-        MainModel.move_the_files(self)
+        self.directory_from_retrievel, self.directory_to_retrievel = MainView.obtainDirectory()
+        if self.directory_from_retrievel == None:
+            print("It is crucial that you pick the right TO directory. We will allow you to attempt to pick a new directory")
+            print("Waiting 5 seconds...")
+            time.sleep(5)
+            MainModel.obtain_directory(self)
+        if self.directory_from_retrievel == None:
+            print("It is crucial that you pick the right TO directory. We will allow you to attempt to pick a new directory")
+            print("Waiting 5 seconds...")
+            time.sleep(5)
+            MainModel.obtain_directory(self)
+        # Warning statement where if the user says no then we terminate.
+        # Safety feature so that the user has to actually read what they are doing.
+        print("WARNING! This program will DELETE files in Directory A and move them to Directory B. Do you wish to continue? WARNING! ")
+        continue_or_terminate = input("Do you want to continue or not? Yes or No").lower()
+        if continue_or_terminate == "yes":
+            MainModel.move_the_files(self)
+        elif continue_or_terminate =="no":
+            print("Program terminated")
+        else:
+            print("We did not understand what you said. Do you know what you are doing?")
+            print("Program Terminated....")
 
 
     def move_the_files(self):
@@ -79,18 +113,18 @@ class MainModel:
         # This will need to be modified eventually so that it can interact with the other classes to already have the directories?
         # this is just our path that we are going to use for testing purposes.
         print("folder_from")
-        print(self.folder_from)
-        for file in os.listdir(self.folder_from):
+        print(self.directory_from_retrievel)
+        for file in os.listdir(self.directory_from_retrievel):
             if any(file.endswith(ext) for ext in self.extension_list):
-                src_path = os.path.join(self.folder_from, file)
-                dest_path = os.path.join(self.folder_to, file)
+                src_path = os.path.join(self.directory_from_retrievel, file)
+                dest_path = os.path.join(self.directory_to_retrievel, file)
                 shutil.move(src_path, dest_path)
                 print(f"Moved {file} to {dest_path}")
                 print(f"Removed {file} in {src_path}")
 
 
     def search_directory(self):
-        self.directory_from_retrievel, self.directory_to_retrievel = MainView.obtainDirectory()
+        self.directory_from_retrievel, self.directory_to_retrievel = obtainDirectory()
         print(self.directory_from_retrievel)
         print(self.directory_to_retrievel)
         print("Testing the static method")
