@@ -26,6 +26,9 @@ SPFM is built using Python and relies on the following packages, which should be
 
 Your contributions to SPFM are highly valued! If you identify any bugs or have suggestions for new features, please create an issue on GitHub or submit a pull request. Your efforts will be acknowledged in the list of contributors featured below.
 
+## Test Your Code
+You will need to write your unit tests with PyTest if you are introducing a new feature or just a small feature. We will look into this test and test it further before giving you a yes or no. 
+
 ## Contributor Guidelines
 
 We eagerly welcome contributions to SPFM. Should you wish to contribute a bug fix or propose a feature, kindly follow these guidelines:
