@@ -43,14 +43,14 @@ class MainView:
         self.toAddress = None
 
 
-    @app.command(help = "Ability to move the files within the directory")
+    @app.command("move",help = "Ability to move the files within the directory")
     def m():
         typer.echo("Executing command --m")
         BeginMovingFiles = MainModel()
         BeginMovingFiles.obtain_directory()
 
 
-    @app.command(help = "Ability to search the specific directory")
+    @app.command("search",help = "Ability to search the specific directory")
     def s():
         typer.echo("Executing command --s")
         #Create new FileSearcher Object
