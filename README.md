@@ -10,7 +10,8 @@ Follow these steps to get started:
 
 1. Clone or download the repository from our GitHub main branch. While you can also access the development branch, be mindful of potential untested bugs.
 2. Launch the command prompt in administrator mode.
-3. Enter the command `python main.py` to initiate the program. Then, follow the provided CLI instructions to execute your desired file-moving tasks.
+3. Type `python main.py m` to move files from one directory to another directory.
+3. Type `python main.py s` to show all files within a directory requested.
 
 ## Tools and Dependencies
 
@@ -19,6 +20,7 @@ SPFM is built using Python and relies on the following packages, which should be
 - `os`
 - `tkinter`
 - `shutil`
+- `typer`
 
 ## Contributing
 
@@ -41,6 +43,6 @@ We eagerly welcome contributions to SPFM. Should you wish to contribute a bug fi
 
 ## License
 
-SPFM operates under the MIT License. For the full license text, refer to the `LICENSE` file included within the repository.
+Python File Mover CLI operates under the MIT License. For the full license text, refer to the `LICENSE` file included within the repository.
 
 Experience the convenience of file management with SPFM—simple, efficient, and effective!
