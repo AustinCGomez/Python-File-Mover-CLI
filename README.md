@@ -1,48 +1,28 @@
-# Python File Mover CLI (Under Active Development)
-### WARNING: Python File Mover CLI (SPFM) is currently in beta testing and active development. Therefore, bugs are to be expected from this program at the moment.
-Python File Mover CLI is a user-friendly Python program designed to streamline the process of moving files within your Windows PC.
+# Python File Mover CLI
+### A simple python utility program to move massive amounts of files and folders at once.
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-## Getting Started
+## Features
+- Move files from Directory A to Directory B with only a few commands.
+- Show a detailed list of every item within a Directory on your computer.
 
-To utilize Python File Mover CLI, ensure that you have Python installed on your Windows PC. If not, you can download the latest version from the official Python website ([Python Downloads](https://www.python.org/downloads/)).
+## Installation
+The core of our project is a rather simple python script.
+Step 1: Install Python 3+
+Step 2: Ensure you have the following dependencies installed(: os, shutil, typer, time, tkinter)
+Step 2: Download the recent release from Github.
+Step 3: Open a command line or powershell as an administrator on your Windows PC.
+Step 3A: Run `python main.py move` to move the files from Directory A to Directory B
+Step 3B: Run `python main.py show` to show all of the different files within a directory.
+Step 4: Repeat for how many times that you need. ✨
 
-Follow these steps to get started:
+## Contribute
+If you submit any code or documentation then your name will be placed here forever to immortalize your contributions to this project. We appreciate any and all help that we can get in regards to this project and we are thankful for each and every contributer.
 
-1. Clone or download the repository from our GitHub main branch. While you can also access the development branch, be mindful of potential untested bugs.
-2. Launch the command prompt in administrator mode.
-3. Type `python main.py m` to move files from one directory to another directory.
-3. Type `python main.py s` to show all files within a directory requested.
+### Testing before pull request
+We have a main_test.py file that uses PyTest(https://docs.pytest.org/en/7.4.x/). Major enhancements must either use main_test.py or a seperate Pytest file to test the functionality and have it passing at the time of your pull request. The Project Maintainer will likely perform a few additional tests if needed before your code is added to the code base. NOTE: Small fixes do not require major testing and neither does documentation.
 
-## Tools and Dependencies
-
-SPFM is built using Python and relies on the following packages, which should be pre-installed with your Python setup:
-
-- `os`
-- `tkinter`
-- `shutil`
-- `typer`
-
-## Contributing
-
-Your contributions to SPFM are highly valued! If you identify any bugs or have suggestions for new features, please create an issue on GitHub or submit a pull request. Your efforts will be acknowledged in the list of contributors featured below.
-
-## Test Your Code
-You will need to write your unit tests with PyTest if you are introducing a new feature or just a small feature. We will look into this test and test it further before giving you a yes or no. 
-
-## Contributor Guidelines
-
-We eagerly welcome contributions to SPFM. Should you wish to contribute a bug fix or propose a feature, kindly follow these guidelines:
-
-1. Open an issue on GitHub to discuss your proposed changes.
-2. Submit a pull request with your modifications.
-3. Upon approval, your name will be listed among our esteemed contributors.
-
-### Our Incredible Contributors
-
-* **Austin Gomez** (GitHub: austinprog)
-
-## License
-
-Python File Mover CLI operates under the MIT License. For the full license text, refer to the `LICENSE` file included within the repository.
-
-Experience the convenience of file management with SPFM—simple, efficient, and effective!
+### Our Awesome Contributers
+This project is made possible by the following individuals:
+Austin Gomez(@AustinCGomez) - Project Maintainer
+Mudassir Chapra(@muddi900)
