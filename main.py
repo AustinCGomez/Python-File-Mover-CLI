@@ -42,20 +42,28 @@ class MainView:
         self.fromAddress = None
         self.toAddress = None
 
+    @app.command("movefolder",help = "Move folders and subdirectories from Directory A to Directory B")
+    def d():
+        typer.echo("Executing command --d")
+        BeginMovingFiles = MainModel()
+        BeginMovingFiles.move_entire_directories()
 
-    @app.command("move",help = "Ability to move the files within the directory")
+
+    @app.command("movefiles",help = "Move files by specific extensiohn from Directory A to Directory B")
     def m():
         typer.echo("Executing command --m")
         BeginMovingFiles = MainModel()
         BeginMovingFiles.obtain_directory()
 
 
-    @app.command("search",help = "Ability to search the specific directory")
+
+    @app.command("search",help = "Search the different types of Files for review purposes in the selected Directory.")
     def s():
         typer.echo("Executing command --s")
         #Create new FileSearcher Object
         newFileSearch = MainModel()
         newFileSearch.search_directory()
+
     @app.command(help = "Program license information")
     def l():
         typer.echo("Executing command --l")
@@ -123,6 +131,10 @@ class MainModel:
             print("We did not understand what you said. Do you know what you are doing?")
             print("Program Terminated....")
 
+    def move_entire_directories(self):
+        self.directory_from_retrievel, self.directory_to_retrievel = MainView.obtainDirectory()
+        shutil.move(self.directory_from_retrievel, self.directory_to_retrievel)
+
 
     def move_the_files(self):
         self.extension_list = []
@@ -154,7 +166,7 @@ class MainModel:
 
 
     def search_directory(self):
-        self.directory_from_retrievel, self.directory_to_retrievel = obtainDirectory()
+        self.directory_from_retrievel, self.directory_to_retrievel = MainView.obtainDirectory()
         print(self.directory_from_retrievel)
         print(self.directory_to_retrievel)
         print("Testing the static method")
@@ -162,9 +174,11 @@ class MainModel:
             if os.path.isdir(self.directory_from_retrievel):
                 print("Listing all files grouped by their extensions in the specified directory:")
                 print(self.directory_from_retrievel)
-                print("Excellent news")
+                print("Files catagorized by groups: ")
                 self._group_files_by_extension()
+                print("Files catagorized by files: ")
                 self._print_files_by_extension()
+                print("Fles catagorized by entire directories: ")
                 self._print_entire_directories()
                 break
             else:
