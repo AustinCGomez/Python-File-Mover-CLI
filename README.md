@@ -8,13 +8,13 @@
 
 ## Installation
 The core of our project is a rather simple python script.
-Step 1: Install Python 3+
-Step 2: Ensure you have the following dependencies installed(: os, shutil, typer, time, tkinter)
-Step 2: Download the recent release from Github.
-Step 3: Open a command line or powershell as an administrator on your Windows PC.
-Step 3A: Run `python main.py move` to move the files from Directory A to Directory B
-Step 3B: Run `python main.py show` to show all of the different files within a directory.
-Step 4: Repeat for how many times that you need. ✨
+- Step 1: Install Python 3+
+- Step 2: Ensure you have the following dependencies installed(: os, shutil, typer, time, tkinter)
+- Step 2: Download the recent release from Github.
+- Step 3: Open a command line or powershell as an administrator on your Windows PC.
+- Step 3A: Run `python main.py move` to move the files from Directory A to Directory B
+- Step 3B: Run `python main.py show` to show all of the different files within a directory.
+- Step 4: Repeat for how many times that you need. ✨
 
 ## Contribute
 If you submit any code or documentation then your name will be placed here forever to immortalize your contributions to this project. We appreciate any and all help that we can get in regards to this project and we are thankful for each and every contributer.
