@@ -25,5 +25,5 @@ We will accept any and all help from open source contributions! The maintainer m
 
 ### Our Awesome Contributers
 This project is made possible by the following individuals:
-Austin Gomez(@AustinCGomez) - Project Maintainer
-Mudassir Chapra(@muddi900)
+- Austin Gomez(@AustinCGomez) - Project Maintainer
+- Mudassir Chapra(@muddi900) 
