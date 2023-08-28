@@ -14,10 +14,10 @@ The program currently must be build in order to run it. In addition, it is curre
 - Step 3: Open a command line or powershell as an administrator on your Windows PC.
 
 ## Commands
-✨ Move large amounts of folders from Directory A to Directory B: `python main.py movefolder`
-✨ Move large amounts of files from Directory A to Directory B: `python main.py movefiles`
-✨ Show files within a specific Directory and the amount of files in each:  `python main.py search`
-✨ Display the license information for the program: `python main.py license
+- ✨ Move large amounts of folders from Directory A to Directory B: `python main.py movefolder`
+- ✨ Move large amounts of files from Directory A to Directory B: `python main.py movefiles`
+- ✨ Show files within a specific Directory and the amount of files in each:  `python main.py search`
+- ✨ Display the license information for the program: `python main.py license
 `
 ## Contribute
 We will accept any and all help from open source contributions! The maintainer maintains a list of features and bugs in the issues tab of our Github fork. Please feel free to comment on any to ask to claim that task, or you can create new issues for discovered bugs and enhancements that you want.
