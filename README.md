@@ -1,5 +1,6 @@
 # Python File Mover CLI Version 0.2.5 Beta
-### The program is currently under major refactoring. Version 0.2.5 has been moved to legacy.py. The new 0.3.0 ALPHA version can be utilized in main.py. 
+### Version 0.3.0 Demo Alpha is now launched! This update features one fully developed feature. We have temporary moved Version 0.2.5 to legacy.py but will be fully released when Version 0.3.0 is completly done(including testing). If you wish to download Version 0.2.5 then head over to our releases tab. I promise that Version 0.3.0 is going to be far superior both code-wise and aesthstically
+
 ### A simple python utility program to move massive amounts of files and folders at once.
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
