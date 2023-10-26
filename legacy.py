@@ -22,8 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.'''
 
 
-import pytest
-import os
+
 
 import os
 import shutil
@@ -43,20 +42,28 @@ class MainView:
         self.fromAddress = None
         self.toAddress = None
 
+    @app.command("movefolder",help = "Move folders and subdirectories from Directory A to Directory B")
+    def d():
+        typer.echo("Executing command --d")
+        BeginMovingFiles = MainModel()
+        BeginMovingFiles.move_entire_directories()
 
-    @app.command("move",help = "Ability to move the files within the directory")
+
+    @app.command("movefiles",help = "Move files by specific extensiohn from Directory A to Directory B")
     def m():
         typer.echo("Executing command --m")
         BeginMovingFiles = MainModel()
         BeginMovingFiles.obtain_directory()
 
 
-    @app.command("search",help = "Ability to search the specific directory")
+
+    @app.command("search",help = "Search the different types of Files for review purposes in the selected Directory.")
     def s():
         typer.echo("Executing command --s")
         #Create new FileSearcher Object
         newFileSearch = MainModel()
         newFileSearch.search_directory()
+
     @app.command(help = "Program license information")
     def l():
         typer.echo("Executing command --l")
@@ -124,6 +131,10 @@ class MainModel:
             print("We did not understand what you said. Do you know what you are doing?")
             print("Program Terminated....")
 
+    def move_entire_directories(self):
+        self.directory_from_retrievel, self.directory_to_retrievel = MainView.obtainDirectory()
+        shutil.move(self.directory_from_retrievel, self.directory_to_retrievel)
+
 
     def move_the_files(self):
         self.extension_list = []
@@ -155,7 +166,7 @@ class MainModel:
 
 
     def search_directory(self):
-        self.directory_from_retrievel, self.directory_to_retrievel = obtainDirectory()
+        self.directory_from_retrievel, self.directory_to_retrievel = MainView.obtainDirectory()
         print(self.directory_from_retrievel)
         print(self.directory_to_retrievel)
         print("Testing the static method")
@@ -163,9 +174,11 @@ class MainModel:
             if os.path.isdir(self.directory_from_retrievel):
                 print("Listing all files grouped by their extensions in the specified directory:")
                 print(self.directory_from_retrievel)
-                print("Excellent news")
+                print("Files catagorized by groups: ")
                 self._group_files_by_extension()
+                print("Files catagorized by files: ")
                 self._print_files_by_extension()
+                print("Fles catagorized by entire directories: ")
                 self._print_entire_directories()
                 break
             else:
@@ -188,57 +201,6 @@ class MainModel:
             if entry.is_dir():
                 print(f"Folders: {entry}")
 
-
-# Fixture to create temporary directories for testing
-@pytest.fixture
-def temp_directories(tmp_path):
-    source_dir = tmp_path / "source"
-    source_dir.mkdir()
-    dest_dir = tmp_path / "destination"
-    dest_dir.mkdir()
-    return source_dir, dest_dir
-
-def test_obtain_directory(monkeypatch, temp_directories):
-    # Simulate user input for the file dialog
-    monkeypatch.setattr('builtins.input', lambda _: str(temp_directories[0]) + "\n" + str(temp_directories[1]))
-
-    from_directory, to_directory = MainView.obtainDirectory()
-    assert from_directory == str(temp_directories[0])
-    assert to_directory == str(temp_directories[1])
-
-def test_move_the_files(temp_directories):
-    source_dir, dest_dir = temp_directories
-    extension_list = [".txt", ".jpg"]
-
-    # Create dummy files with specified extensions
-    for ext in extension_list:
-        (source_dir / f"file{ext}").touch()
-
-    # Create a MainModel instance and set the directories and extension list
-    main_model = MainModel()
-    main_model.directory_from_retrievel = source_dir
-    main_model.directory_to_retrievel = dest_dir
-    main_model.extension_list = extension_list
-
-    # Call the move_the_files() method
-    main_model.move_the_files()
-
-    for extension in extension_list:
-        assert len(os.listdir(source_dir)) == 0
-        assert len(os.listdir(dest_dir)) == 1
-
-def test_search_directory(temp_directories, capsys):
-    source_dir, _ = temp_directories
-    extension_list = [".txt", ".jpg"]
-
-    # Create dummy files with specified extensions
-    for ext in extension_list:
-        (source_dir / f"file{ext}").touch()
-
-    MainModel.search_directory(source_dir)
-
-    captured = capsys.readouterr()
-    assert all(ext in captured.out for ext in extension_list)
-
 if __name__ == "__main__":
-    pytest.main()
+    BeginProgram = MainView()
+    BeginProgram.main()

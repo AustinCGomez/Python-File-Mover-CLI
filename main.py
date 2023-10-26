@@ -23,184 +23,176 @@ SOFTWARE.'''
 
 
 
-
+# This is a prototype of a new menu using Click
 import os
+import sys
 import shutil
 import typer
 import time
 from tkinter import filedialog
 from tkinter import *
+import click
+from art import *
 
+''' Static functions that give some information about our program'''
+LOGO = text2art("Python FIle Mover")
+GOODBYE = text2art("GOODBYE")
+Contribute = ("Want additional features? Spotted a bug? Head to our Github and lend a helping hand :) ->  https://github.com/AustinCGomez/Python-File-Mover-CLI")
+VERSION = "Version 0.3.0 Beta."
+LICENSE = "This software is published under the MIT License."
+AUTHOR = "Austin Gomez."
+WARNING = "!!WARNING!! This command will DELETE files from Directory A and move them to DIRECTORY B."
 
-
-class MainView:
-
-    app = typer.Typer()
-
-    def __init__(self):
-        self.userInput = None
-        self.fromAddress = None
-        self.toAddress = None
-
-    @app.command("movefolder",help = "Move folders and subdirectories from Directory A to Directory B")
-    def d():
-        typer.echo("Executing command --d")
-        BeginMovingFiles = MainModel()
-        BeginMovingFiles.move_entire_directories()
-
-
-    @app.command("movefiles",help = "Move files by specific extensiohn from Directory A to Directory B")
-    def m():
-        typer.echo("Executing command --m")
-        BeginMovingFiles = MainModel()
-        BeginMovingFiles.obtain_directory()
-
-
-
-    @app.command("search",help = "Search the different types of Files for review purposes in the selected Directory.")
-    def s():
-        typer.echo("Executing command --s")
-        #Create new FileSearcher Object
-        newFileSearch = MainModel()
-        newFileSearch.search_directory()
-
-    @app.command(help = "Program license information")
-    def l():
-        typer.echo("Executing command --l")
-        print("This program utilizes the MIT License for the program. Thank you.")
-
-
-    @staticmethod
-    def obtainDirectory():
-        print("Opening a Graphical User Interface(GUI) to obtain your directory to move files FROM")
+class GatherDirectoriesProcess():
+    ''' We will use one class only to get our To and FROM directories since the program can use it for all functions.
+        ALl of the code to get and verify the directories will be in this class only. Any other classes
+        can therefore create an instance of it.  '''
+    def __init__(self, directory_a, directory_b):
+        self.directory_from = directory_a
+        self.directory_to = directory_b
+    def obtain_dirs(self):
         root = Tk()
         root.withdraw()
-        from_directory = filedialog.askdirectory()
-        to_directory = filedialog.askdirectory()
-        if not from_directory:
-            print("Error: You did not set any FROM Directory")
-            return None, None
-        if not to_directory:
-            print("Error: You did not set any TO Directory")
-            return None, None
-        else:
-            print(f"Success: We have obtained the directory: {from_directory}")
-            print(f"Success: We have obtained the directory: {to_directory}")
-            return from_directory, to_directory
-        root = Tk()
-        root.withdraw()
+        self.directory_from = filedialog.askdirectory()
+        self.directory_to = filedialog.askdirectory()
+        while not self.directory_from:
+            self.directory_from = filedialog.askdirectory()
+            if not self.directory_from:
+                print("Error: Please define an FROM directory.")
+        while not self.directory_to:
+            self.directory_to = filedialog.askdirectory()
+            if not self.directory_to:
+                print("Error: Please define an TO directory.")
 
+        print(f"Obtained Directory A: {self.directory_from}")
+        print(f"Obtained Directory B: {self.directory_to}")
 
+        root.destroy()
 
+        return self.directory_from, self.directory_to
 
-    def main(self):
-        self.app()
-
-
-
-#This will be our MainModel for the program and it contains all of the code for the operations of the program  ```
-class MainModel:
-    def __init__(self):
-        self.directory_from_retrievel = None
-        self.directory_to_retrievel = None
-        self.continue_or_terminate = None
-        self.file_extensions = {}
-
-
-    def obtain_directory(self):
-        self.directory_from_retrievel, self.directory_to_retrievel = MainView.obtainDirectory()
-        if self.directory_from_retrievel == None:
-            print("It is crucial that you pick the right TO directory. We will allow you to attempt to pick a new directory")
-            print("Waiting 5 seconds...")
-            time.sleep(5)
-            MainModel.obtain_directory(self)
-        if self.directory_from_retrievel == None:
-            print("It is crucial that you pick the right TO directory. We will allow you to attempt to pick a new directory")
-            print("Waiting 5 seconds...")
-            time.sleep(5)
-            MainModel.obtain_directory(self)
-        # Warning statement where if the user says no then we terminate.
-        # Safety feature so that the user has to actually read what they are doing.
-        print("WARNING! This program will DELETE files in Directory A and move them to Directory B. Do you wish to continue? WARNING! ")
-        continue_or_terminate = input("Do you want to continue or not? Yes or No").lower()
-        if continue_or_terminate == "yes":
-            MainModel.move_the_files(self)
-        elif continue_or_terminate =="no":
-            print("Program terminated")
-        else:
-            print("We did not understand what you said. Do you know what you are doing?")
-            print("Program Terminated....")
-
-    def move_entire_directories(self):
-        self.directory_from_retrievel, self.directory_to_retrievel = MainView.obtainDirectory()
-        shutil.move(self.directory_from_retrievel, self.directory_to_retrievel)
-
-
-    def move_the_files(self):
+class ObtainFileExtensionListProcess():
+    '''This service process will obtain our file extension list which will then be sent
+    back to the MoveFileCommand() to be utilized for the operation of moving files by extension. '''
+    def __init__(self, user_list=None):
         self.extension_list = []
+    def obtain_file_list(self):
         while True:
-            self.getInput = input("Please enter each file extension that you want to move from the directory. Please type 'quit' when you are done")
+            self.getInput = input("Please enter each file extension that you want to move files from | Type 'quit' when done.")
 
             if self.getInput == 'quit':
                 break
 
             self.extension_list.append(self.getInput)
 
-        # Display the list of all of the file extensions that the user entered.
-        print("Here are all of the file extensions that you chose to move:")
-        for extension in self.extension_list:
-            print(extension)
+            print("List of user entered file extensions: ")
 
-        print("We will now attempt to move the files based on extension from the list given..")
-        # This will need to be modified eventually so that it can interact with the other classes to already have the directories?
-        # this is just our path that we are going to use for testing purposes.
-        print("folder_from")
-        print(self.directory_from_retrievel)
-        for file in os.listdir(self.directory_from_retrievel):
-            if any(file.endswith(ext) for ext in self.extension_list):
-                src_path = os.path.join(self.directory_from_retrievel, file)
-                dest_path = os.path.join(self.directory_to_retrievel, file)
-                shutil.move(src_path, dest_path)
-                print(f"Moved {file} to {dest_path}")
-                print(f"Removed {file} in {src_path}")
+        return self.extension_list
+
+class DefineCommands():
+    ''' This class displays all of our classes and allows the user to select what actions they want to take '''
+    def __init__(self):
+        self.directory_from = None
+        self.directory_to = None
+    def main(self):
+        print(LOGO)
+        print(VERSION)
+        print(LICENSE)
+        print(" ")
+        click.echo("Please choose the obtain below to begin: ")
+        action = click.prompt(
+        "--movefr - Move folders and subdirectories from Directory A to Directory B\n"
+        "--movefs - Move files by specific extension from Directory A to Directory B\n"
+        "--search - Search for different types of files for review purposes in the selected directories",
+        type = click.Choice(['--movefr', '--movefs', '--search'])
+        )
+
+        if action == "--movefr":
+            self.move_folders()
+        elif action == "--movefs":
+            self.move_files()
+        elif action == '--search':
+            self.search_directory()
+
+    def move_folders(self):
+        new_file_move = MoveFilesCommand(self.directory_from, self.directory_to)
+        new_file_move.start_command()
+        #go_to_move_command.start_command(blank_dir_a, blank_dir_b)
+
+    def move_files(self):
+        print("To Be Determined ")
+
+    def searchFiles(self):
+        print("To Be Determined ")
+
+class MoveFilesCommand():
+
+    def __init__(self, dir_a, dir_b):
+        self.directory_from = None
+        self.directory_to = None
+        self.user_extensions = []
+
+    def process_move(self):
+        output_padding = " " * (len("Name") - len("Extension"))
+        #Obtain extensions from our Extension Process first.
+        click.echo("Please choose the obtain below to begin: ")
+        action = click.prompt(
+        "--begin - Begin the process of moving files first by obtaining a list of file extensions. B\n"
+        "--quit - Quit the Move command and return to the main menu.",
+        type = click.Choice(['--begin', '--quit'])
+        )
+
+        if action == "--begin":
+            #create new instance to create file extension page.
+
+            retrieve_file_extensions = ObtainFileExtensionListProcess(self.user_extensions)
+            self.user_extensions = retrieve_file_extensions.obtain_file_list()
+            print(" ")
+            print("User Selected Extensions: ")
+            print("--------------------------")
+            for extension in self.user_extensions:
+                print(extension)
+            time.sleep(2)
+            print("ATTEMPTING to move files based on extension from Directory A to Directory B")
+            print("TEST: Double Check Dirs")
+            print(self.directory_from)
+            print(self.directory_to)
+            for file in os.listdir(self.directory_from):
+                if any(file.endswith(ext) for ext in self.user_extensions):
+                    src_path = os.path.join(self.directory_from, file)
+                    dest_path = os.path.join(self.directory_to, file)
+                    shutil.move(src_path, dest_path)
+                    print(f"Name: {file}{output_padding} - Removed From: {src_path} and moved to: {dest_path}")
+                    print(" ")
 
 
-    def search_directory(self):
-        self.directory_from_retrievel, self.directory_to_retrievel = MainView.obtainDirectory()
-        print(self.directory_from_retrievel)
-        print(self.directory_to_retrievel)
-        print("Testing the static method")
-        while True:
-            if os.path.isdir(self.directory_from_retrievel):
-                print("Listing all files grouped by their extensions in the specified directory:")
-                print(self.directory_from_retrievel)
-                print("Files catagorized by groups: ")
-                self._group_files_by_extension()
-                print("Files catagorized by files: ")
-                self._print_files_by_extension()
-                print("Fles catagorized by entire directories: ")
-                self._print_entire_directories()
-                break
-            else:
-                print("Invalid directory path. Please enter a valid one.")
 
-    def _group_files_by_extension(self):
-        for filename in os.listdir(self.directory_from_retrievel):
-            if os.path.isfile(os.path.join(self.directory_from_retrievel, filename)):
-                _, ext = os.path.splitext(filename)
-                self.file_extensions.setdefault(ext, []).append(filename)
+        elif action == "--quit":
+            print("-" * 130)
+            print(GOODBYE)
+            print(Contribute)
+            print("-" * 130)
+            time.sleep(2)
+            sys.exit()
 
-    def _print_files_by_extension(self):
-        for ext, files in self.file_extensions.items():
-            print(f"Extension: {ext}")
-            print('\n'.join(files))
-            print()
+    def start_command(self):
+        print(WARNING)
+        print("Opening a Graphical User Interface(GUI) to obtain your directories to move files FROM A to B")
+        # Create a new instance in Obtain_Directory to ensure that the directories arw what we want.
+        verify_directories = GatherDirectoriesProcess(self.directory_from, self.directory_to)
+        self.directory_from, self.directory_to = verify_directories.obtain_dirs()
+        # Our input will be validated at this point and can be moved down the process line.
+        self.process_move()
+        #move_files = MoveFilesCommand(self.directory_from, self.directory_to)
+        #move_files.process_move()
 
-    def _print_entire_directories(self):
-        for entry in os.scandir(self.directory_from_retrievel):
-            if entry.is_dir():
-                print(f"Folders: {entry}")
+
+
+
+
+
+
 
 if __name__ == "__main__":
-    BeginProgram = MainView()
+    BeginProgram = DefineCommands()
     BeginProgram.main()
