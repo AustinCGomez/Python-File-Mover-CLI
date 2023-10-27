@@ -1,28 +1,16 @@
-# Python File Mover CLI
+# Python File Mover CLI 
+## Version 0.3.0 - ALPHA DEMO 
 ### A simple python utility program to move massive amounts of files and folders at once.
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-## Features
-- Move files from Directory A to Directory B with only a few commands.
-- Show a detailed list of every item within a Directory on your computer.
+## Version 0.3.0 full version is coming soon! We have migrated to a demo version while I finish up the last features for Version 0.3.0 - Full Relase. Version 0.2.5 has been placed in legacy.py for usage. 
 
+## Features
+- Move files from Directory A to Directory B based on extension type.
 ## Installation
 The core of our project is a rather simple python script.
 - Step 1: Install Python 3+
 - Step 2: Ensure you have the following dependencies installed(: os, shutil, typer, time, tkinter)
-- Step 2: Download the recent release from Github.
-- Step 3: Open a command line or powershell as an administrator on your Windows PC.
-- Step 3A: Run `python main.py move` to move the files from Directory A to Directory B
-- Step 3B: Run `python main.py show` to show all of the different files within a directory.
-- Step 4: Repeat for how many times that you need. ✨
-
-## Contribute
-If you submit any code or documentation then your name will be placed here forever to immortalize your contributions to this project. We appreciate any and all help that we can get in regards to this project and we are thankful for each and every contributer.
-
-### Testing before pull request
-We have a main_test.py file that uses PyTest(https://docs.pytest.org/en/7.4.x/). Major enhancements must either use main_test.py or a seperate Pytest file to test the functionality and have it passing at the time of your pull request. The Project Maintainer will likely perform a few additional tests if needed before your code is added to the code base. NOTE: Small fixes do not require major testing and neither does documentation.
-
-### Our Awesome Contributers
-This project is made possible by the following individuals:
-Austin Gomez(@AustinCGomez) - Project Maintainer
-Mudassir Chapra(@muddi900)
+- Step 3: Move the files into a directory of your choice.
+- Step 4: Load into the directory by typing 'cd /directory/etc' in your command line.
+- Step 5: Run python main.py to run the Version 0.3.0 Demo. 
