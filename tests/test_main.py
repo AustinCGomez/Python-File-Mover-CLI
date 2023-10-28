@@ -32,7 +32,9 @@ import time
 from tkinter import filedialog
 from tkinter import *
 import click
+import pytest
 from art import *
+from unittest.mock import *
 
 ''' Static functions that give some information about our program'''
 LOGO = text2art("Python FIle Mover")
@@ -54,17 +56,15 @@ class GatherDirectoriesProcess():
         print(f"Please re-enter the directories so that they are not {error_reason}")
     def obtain_dirs(self):
         print("Please select two directories from your computer system!")
-        time.sleep(2)
+        time.sleep(5)
         self.directory_from = filedialog.askdirectory()
         self.directory_to = filedialog.askdirectory()
         while not self.directory_from:
             self.directory_from = filedialog.askdirectory()
             if not self.directory_from:
                 print("Error: Please define an FROM directory.")
-                time.sleep(2)
         while not self.directory_to:
             self.directory_to = filedialog.askdirectory()
-            time.sleep(2)
             if not self.directory_to:
                 print("Error: Please define an TO directory.")
 
@@ -72,13 +72,12 @@ class GatherDirectoriesProcess():
             print("Error: Directory TO and Directory FROM cannot be the same!")
             self.obtain_dirs()
 
-
-        return self.directory_from, self.directory_to
 class ObtainFileExtensionListProcess():
     '''This service process will obtain our file extension list which will then be sent
     back to the MoveFileCommand() to be utilized for the operation of moving files by extension. '''
     def __init__(self, user_list=None):
         self.extension_list = []
+        self.root = Tk()
     def obtain_file_list(self):
         while True:
             self.getInput = input("Please enter each file extension that you want to move files from | Type 'quit' when done.")
@@ -120,7 +119,8 @@ class DefineCommands():
         click.echo("Please choose the obtain below to begin: ")
         action = click.prompt(
         "--move-files - Move files by specific file extension from Directory A to Directory B!\n"
-        "--move-folders - Move Entire Folders from Directory A to Directory B!",
+        "--move-folders - Move Entire Folders from Directory A to Directory B!\n"
+        "--move-to-recycle - Move Entire Directory to the Windows Recycle Bin.",
         type = click.Choice(['--move-files', '--move-folders', '--move-to-recycle'])
         )
 
@@ -171,7 +171,6 @@ class MoveFilesCommand():
                 print(extension)
             time.sleep(2)
             print("ATTEMPTING to move files based on extension from Directory A to Directory B")
-            print("TEST: Double Check Dirs")
             print(self.directory_from)
             print(self.directory_to)
             for file in os.listdir(self.directory_from):
@@ -213,8 +212,38 @@ class MoveFoldersCommand():
         print(f"SUCCESS: The Folder has been moved from {self.directory_from} to {self.directory_to}")
 
 
-
-
 if __name__ == "__main__":
     BeginProgram = DefineCommands()
     BeginProgram.main()
+
+
+'''Test case 1: Write a test to see what happens when Directory A and Directory B are set to the same directory by accident of the user in #GatherDirectoriesProcess.  '''
+class TestGatherDirectoriesProcess():
+    ''' We will use one class only to get our To and FROM directories since the program can use it for all functions.
+        ALl of the code to get and verify the directories will be in this class only. Any other classes
+        can therefore create an instance of it.  '''
+    def test_obtain_dirs(self):
+        root = Tk()
+        root.withdraw()
+        self.directory_from = filedialog.askdirectory()
+        self.directory_to = filedialog.askdirectory()
+        while not self.directory_from:
+            print("error: ")
+            self.directory_from = filedialog.askdirectory()
+            if not self.directory_from:
+                print("Error: Please define an FROM directory.")
+        while not self.directory_to:
+            self.directory_to = filedialog.askdirectory()
+            if not self.directory_to:
+                print("Error: Please define an TO directory.")
+        if self.directory_from == self.directory_to:
+            print("Error: Directory TO and Directory FROM cannot be the same!")
+            self.test_obtain_dirs()
+
+        assert self.directory_from != self.directory_to
+        print(f"Obtained Directory A: {self.directory_from}")
+        print(f"Obtained Directory B: {self.directory_to}")
+
+        root.destroy()
+
+        return self.directory_from, self.directory_to
