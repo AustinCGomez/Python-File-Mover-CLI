@@ -183,7 +183,7 @@ class MoveFilesCommand():
                     print(f'The directory {self.directory_from} is empty. Please pick a directory that is not empty.\n')
                     GatherDirectoriesProcess.obtain_dirs(self)
                 if ext.lstrip('.') not in from_file_ext:
-                    print(f'{ext} extension not found in directory {self.directory_from}. Please reenter the extensions and make sure to include the "." in the extenson name.\n')
+                    print(f'{ext} extension not found in directory {self.directory_from}. Please reenter the extension names.\n')
                     self.process_move()
             for file in os.listdir(self.directory_from):
                 if any(file.endswith(ext) for ext in self.user_extensions):
