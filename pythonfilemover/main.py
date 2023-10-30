@@ -172,8 +172,19 @@ class MoveFilesCommand():
             time.sleep(2)
             print("ATTEMPTING to move files based on extension from Directory A to Directory B")
             print("TEST: Double Check Dirs")
-            print(self.directory_from)
-            print(self.directory_to)
+            print(f'{self.directory_from}\n')
+            print(f'{self.directory_to}\n')
+            # Compare extensions user entered to extensions in from folder. If ext is missing from folder,
+            # ask user to reenter extension names
+            for ext in self.user_extensions:
+                from_file_ext = [os.path.splitext(file)[-1].lstrip('.') for file in os.listdir(self.directory_from)]
+                # if directory is empty, have user reselect new directories
+                if not from_file_ext or from_file_ext == ['']:
+                    print(f'The directory {self.directory_from} is empty. Please pick a directory that is not empty.\n')
+                    GatherDirectoriesProcess.obtain_dirs(self)
+                if ext.lstrip('.') not in from_file_ext:
+                    print(f'{ext} extension not found in directory {self.directory_from}. Please reenter the extension names.\n')
+                    self.process_move()
             for file in os.listdir(self.directory_from):
                 if any(file.endswith(ext) for ext in self.user_extensions):
                     src_path = os.path.join(self.directory_from, file)
