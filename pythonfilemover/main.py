@@ -35,7 +35,7 @@ from art import *
 LOGO = text2art("Python FIle Mover")
 GOODBYE = text2art("GOODBYE")
 CONTRIBUTE = ("Want additional features? Spotted a bug? Head to our Github and lend a helping hand :) ->  https://github.com/AustinCGomez/Python-File-Mover-CLI")
-VERSION = "Version 0.3.0 Beta."
+VERSION = "Version 0.3.5."
 LICENSE = "This software is published under the MIT License."
 AUTHOR = "Program designed and Authored by Austin Gomez."
 WARNING = "!!WARNING!! This command will DELETE files from Directory A and move them to DIRECTORY B."
@@ -95,7 +95,7 @@ class DirectoryStructureInfoProcess():
         for dirB_folders in os.listdir(dir_b):
             if os.path.isdir(dirB_folders):
                 print(dirB_folders)
-                
+
 class GatherDirectoriesProcess():
     ''' We will use one class only to get our To and FROM directories since the program can use it for all functions.
         ALl of the code to get and verify the directories will be in this class only. Any other classes

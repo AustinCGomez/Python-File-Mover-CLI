@@ -1,5 +1,5 @@
 ![alt text](https://i.imgur.com/z1ogxT9.png)
-# Version 0.3.0
+# Version 0.3.5
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
 This program provides a simple way to move massive amounts of files from one directory to another directory without having to manually go into your directories and move each file one by one. With PythonFileMover all you have to do is open up your command line and run our simple commands to move your files around on your computer with ease.  You can move massive amounts of files
