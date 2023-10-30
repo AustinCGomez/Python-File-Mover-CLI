@@ -73,8 +73,29 @@ class MainMenu():
         new_folder_move = MoveFoldersCommand(self.directory_from, self.directory_to)
         new_folder_move.process_file_move()
 
-
-
+class DirectoryStructureInfoProcess():
+    ''' This process will gather the information from each directory and deliver
+        it right back to the class the requested the information. It will also
+        handle proper formatting. '''
+    def __init__(self, blank):
+        self.blank = None
+    def showFiles(self, dir_a, dir_b):
+        print(f"Files found in {dir_a}: ")
+        for dirA_files in os.listdir(dir_a):
+            print(dirA_files)
+        print(" ")
+        print(f"Files found in {dir_b}: ")
+        for dirB_files in os.listdir(dir_b):
+            print(dirB_files)
+    def showFolders(self, dir_a, dir_b):
+        print(f"Folders found in {dir_a}:")
+        for dirA_folders in os.listdir(dir_a):
+            if os.path.isdir(dirA_folders):
+                print(dirA_folders)
+        for dirB_folders in os.listdir(dir_b):
+            if os.path.isdir(dirB_folders):
+                print(dirB_folders)
+                
 class GatherDirectoriesProcess():
     ''' We will use one class only to get our To and FROM directories since the program can use it for all functions.
         ALl of the code to get and verify the directories will be in this class only. Any other classes
@@ -198,7 +219,8 @@ class MoveFilesCommand():
         # Create a new instance in Obtain_Directory to ensure that the directories arw what we want.
         verify_directories = GatherDirectoriesProcess(self.directory_from, self.directory_to)
         self.directory_from, self.directory_to = verify_directories.obtain_dirs()
-        # Our input will be validated at this point and can be moved down the process line.
+        display_dir_info = DirectoryStructureInfoProcess("blank")
+        display_dir_info.showFiles(self.directory_from, self.directory_to)
         self.process_move()
 
 
@@ -211,6 +233,8 @@ class MoveFoldersCommand():
         print(WARNING)
         verify_directories = GatherDirectoriesProcess(self.directory_from, self.directory_to)
         self.directory_from, self.directory_to = verify_directories.obtain_dirs()
+        display_folder_info = DirectoryStructureInfoProcess("blank")
+        display_folder_info.showFolders(self.directory_from, self.directory_to)
         shutil.move(self.directory_from, self.directory_to)
         print(f"SUCCESS: The Folder has been moved from {self.directory_from} to {self.directory_to}")
 
