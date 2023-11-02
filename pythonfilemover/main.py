@@ -33,6 +33,7 @@ from tkinter import filedialog
 from tkinter import *
 import click
 from art import *
+import send2trash
 
 ''' Static functions that give some information about our program'''
 LOGO = text2art("Python FIle Mover")
@@ -42,7 +43,6 @@ VERSION = "Version 0.3.0 Beta."
 LICENSE = "This software is published under the MIT License."
 AUTHOR = "Program designed and Authored by Austin Gomez."
 WARNING = "!!WARNING!! This command will DELETE files from Directory A and move them to DIRECTORY B."
-recycle_bin = os.environ.get('SystemRoot') + r'\$Recycle.Bin'
 
 class GatherDirectoriesProcess():
     ''' We will use one class only to get our To and FROM directories since the program can use it for all functions.
@@ -121,21 +121,21 @@ class DefineCommands():
         click.echo("Please choose the obtain below to begin: ")
         action = click.prompt(
         "--move-files - Move files by specific file extension from Directory A to Directory B!\n"
-        "--move-folders - Move Entire Folders from Directory A to Directory B!",
-        type = click.Choice(['--move-files', '--move-folders', '--move-to-recycle'])
+        "--move-folders - Move Entire Folders from Directory A to Directory B!\n"
+        "--move-to-recycle-bin - Move file to the recycle bin!",
+        type = click.Choice(['--move-files', '--move-folders', '--move-to-recycle-bin'])
         )
 
         if action == "--move-files":
             self.move_files_by_extension()
         elif action == "--move-folders":
             self.move_entire_folders()
-        elif action == '--move-to-recycle':
+        elif action == '--move-to-recycle-bin':
             self.move_to_recycle_bin()
     def move_to_recycle_bin(self): 
-        new_file_move = MoveFilesToTrashCommand(self.directory_from, recycle_bin)
+        new_file_move = MoveFilesToTrashCommand()
         new_file_move.process_move()
         
-
     def move_files_by_extension(self):
         new_file_move = MoveFilesCommand(self.directory_from, self.directory_to)
         new_file_move.start_command()
@@ -218,11 +218,10 @@ class MoveFoldersCommand():
         print(f"SUCCESS: The Folder has been moved from {self.directory_from} to {self.directory_to}")
 
 class MoveFilesToTrashCommand():
-    def __init__(self, dir_a, dir_b): 
-        self.directory_from = None
-        self.directory_to = recycle_bin
-        self.user_extensions = []
-    
+    def __init__(self): 
+        #self.directory_to = os.environ.get('SystemRoot') + r'\$Recycle.Bin'
+        pass
+
     def process_move(self):
         output_padding = " " * (len("Name") - len("Extension"))
         #Obtain extensions from our Extension Process first.
@@ -232,38 +231,22 @@ class MoveFilesToTrashCommand():
         "--quit - Quit the Move command and return to the main menu.",
         type = click.Choice(['--begin', '--quit'])
         )
-        if action == "--begin": 
-            print("This action will result in file deletion!")
-            retrieve_file_extensions = ObtainFileExtensionListProcess(self.user_extensions)
-            self.user_extensions = retrieve_file_extensions.obtain_file_list()
-            print(" ")
-            print("User Selected Extensions: ")
-            print("--------------------------")
-            for extension in self.user_extensions:
-                print(extension)
-            time.sleep(2)
-            print("ATTEMPTING to move files based on extension from Directory A to the recycle bin!")
-            print("TEST: Double Check Dirs")
-            print(self.directory_from)
-            print(self.directory_to)
-            for file in os.listdir(self.directory_from):
-                if any(file.endswith(ext) for ext in self.user_extensions):
-                    src_path = os.path.join(self.directory_from, file)
-                    dest_path = os.path.join(self.directory_to, file)
-                    shutil.move(src_path, dest_path)
-                    print(f"Name: {file}{output_padding} - Removed From: {src_path} and moved to: {dest_path}")
-                    print(" ")
 
+        if action == "--begin":
+            print("This action will move files to the recycle bin!")
+            file_path = filedialog.askopenfilename()
 
+            if file_path: 
+                file_path = os.path.normpath(file_path)
+            send2trash.send2trash(file_path)  
 
         elif action == "--quit":
             # Create a new instance invoking that the user wants to end the program.
             end_program = EndProgramProcess()
             EndProgramProcess.end(self.directory_from)
+    
 
 
-    
-    
 if __name__ == "__main__":
     BeginProgram = DefineCommands()
     BeginProgram.main()
