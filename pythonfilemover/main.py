@@ -113,6 +113,7 @@ class DefineCommands():
     def __init__(self):
         self.directory_from = None
         self.directory_to = None
+        self.file_path = None  
     def main(self):
         print(LOGO)
         print(VERSION)
@@ -133,7 +134,7 @@ class DefineCommands():
         elif action == '--move-to-recycle-bin':
             self.move_to_recycle_bin()
     def move_to_recycle_bin(self): 
-        new_file_move = MoveFilesToTrashCommand()
+        new_file_move = MoveFilesToTrashCommand(self.file_path)
         new_file_move.process_move()
         
     def move_files_by_extension(self):
@@ -218,7 +219,8 @@ class MoveFoldersCommand():
         print(f"SUCCESS: The Folder has been moved from {self.directory_from} to {self.directory_to}")
 
 class MoveFilesToTrashCommand():
-    def __init__(self): 
+    def __init__(self, file_path): 
+        self.file_path = file_path 
         #self.directory_to = os.environ.get('SystemRoot') + r'\$Recycle.Bin'
         pass
 
