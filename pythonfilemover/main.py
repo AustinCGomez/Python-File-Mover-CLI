@@ -42,37 +42,6 @@ AUTHOR = "Program designed and Authored by Austin Gomez."
 WARNING = "!!WARNING!! This command will DELETE files from Directory A and move them to DIRECTORY B."
 
 
-class MainMenu():
-    ''' This class displays all of our classes and allows the user to select what actions they want to take '''
-    def __init__(self):
-        self.directory_from = None
-        self.directory_to = None
-    def main(self):
-        print(LOGO)
-        print(VERSION)
-        print(LICENSE)
-        print(" ")
-        click.echo("Please choose the obtain below to begin: ")
-        action = click.prompt(
-        "--move-files - Move files by specific file extension from Directory A to Directory B!\n"
-        "--move-folders - Move Entire Folders from Directory A to Directory B!",
-        type = click.Choice(['--move-files', '--move-folders', '--move-to-recycle'])
-        )
-
-        if action == "--move-files":
-            self.move_files_by_extension()
-        elif action == "--move-folders":
-            self.move_entire_folders()
-
-    def move_files_by_extension(self):
-        new_file_move = MoveFilesCommand(self.directory_from, self.directory_to)
-        new_file_move.start_command()
-        #go_to_move_command.start_command(blank_dir_a, blank_dir_b)
-
-    def move_entire_folders(self):
-        #Create a new instance in the #MoveFoldersCommand
-        new_folder_move = MoveFoldersCommand(self.directory_from, self.directory_to)
-        new_folder_move.process_file_move()
 
 class DirectoryStructureInfoProcess():
     ''' This process will gather the information from each directory and deliver
@@ -162,12 +131,12 @@ class EndProgramProcess():
         sys.exit()
 
 
-class DefineCommands():
+class MainMenu():
     ''' This class displays all of our classes and allows the user to select what actions they want to take '''
     def __init__(self):
         self.directory_from = None
         self.directory_to = None
-        self.file_path = None  
+        self.file_path = None
     def main(self):
         print(LOGO)
         print(VERSION)
@@ -187,10 +156,10 @@ class DefineCommands():
             self.move_entire_folders()
         elif action == '--move-to-recycle-bin':
             self.move_to_recycle_bin()
-    def move_to_recycle_bin(self): 
+    def move_to_recycle_bin(self):
         new_file_move = MoveFilesToTrashCommand(self.file_path)
         new_file_move.process_move()
-        
+
     def move_files_by_extension(self):
         new_file_move = MoveFilesCommand(self.directory_from, self.directory_to)
         new_file_move.start_command()
@@ -280,8 +249,8 @@ class MoveFoldersCommand():
         print(f"SUCCESS: The Folder has been moved from {self.directory_from} to {self.directory_to}")
 
 class MoveFilesToTrashCommand():
-    def __init__(self, file_path): 
-        self.file_path = file_path 
+    def __init__(self, file_path):
+        self.file_path = file_path
         #self.directory_to = os.environ.get('SystemRoot') + r'\$Recycle.Bin'
         pass
 
@@ -299,15 +268,15 @@ class MoveFilesToTrashCommand():
             print("This action will move files to the recycle bin!")
             file_path = filedialog.askopenfilename()
 
-            if file_path: 
+            if file_path:
                 file_path = os.path.normpath(file_path)
-            send2trash.send2trash(file_path)  
+            send2trash.send2trash(file_path)
 
         elif action == "--quit":
             # Create a new instance invoking that the user wants to end the program.
             end_program = EndProgramProcess()
             EndProgramProcess.end(self.directory_from)
-    
+
 
 if __name__ == "__main__":
     BeginProgram = MainMenu()
