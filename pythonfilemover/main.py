@@ -30,6 +30,7 @@ from tkinter import filedialog
 from tkinter import *
 import click
 from art import *
+import send2trash
 
 ''' Static functions that give some information about our program'''
 LOGO = text2art("Python FIle Mover")
@@ -160,6 +161,46 @@ class EndProgramProcess():
         time.sleep(2)
         sys.exit()
 
+
+class DefineCommands():
+    ''' This class displays all of our classes and allows the user to select what actions they want to take '''
+    def __init__(self):
+        self.directory_from = None
+        self.directory_to = None
+        self.file_path = None  
+    def main(self):
+        print(LOGO)
+        print(VERSION)
+        print(LICENSE)
+        print(" ")
+        click.echo("Please choose the obtain below to begin: ")
+        action = click.prompt(
+        "--move-files - Move files by specific file extension from Directory A to Directory B!\n"
+        "--move-folders - Move Entire Folders from Directory A to Directory B!\n"
+        "--move-to-recycle-bin - Move file to the recycle bin!",
+        type = click.Choice(['--move-files', '--move-folders', '--move-to-recycle-bin'])
+        )
+
+        if action == "--move-files":
+            self.move_files_by_extension()
+        elif action == "--move-folders":
+            self.move_entire_folders()
+        elif action == '--move-to-recycle-bin':
+            self.move_to_recycle_bin()
+    def move_to_recycle_bin(self): 
+        new_file_move = MoveFilesToTrashCommand(self.file_path)
+        new_file_move.process_move()
+        
+    def move_files_by_extension(self):
+        new_file_move = MoveFilesCommand(self.directory_from, self.directory_to)
+        new_file_move.start_command()
+        #go_to_move_command.start_command(blank_dir_a, blank_dir_b)
+
+    def move_entire_folders(self):
+        #Create a new instance in the #MoveFoldersCommand
+        new_folder_move = MoveFoldersCommand(self.directory_from, self.directory_to)
+        new_folder_move.process_file_move()
+
 class MoveFilesCommand():
     '''This class will move the files based on the user-defined extensions list.  '''
     def __init__(self, dir_a, dir_b):
@@ -237,6 +278,36 @@ class MoveFoldersCommand():
         display_folder_info.showFolders(self.directory_from, self.directory_to)
         shutil.move(self.directory_from, self.directory_to)
         print(f"SUCCESS: The Folder has been moved from {self.directory_from} to {self.directory_to}")
+
+class MoveFilesToTrashCommand():
+    def __init__(self, file_path): 
+        self.file_path = file_path 
+        #self.directory_to = os.environ.get('SystemRoot') + r'\$Recycle.Bin'
+        pass
+
+    def process_move(self):
+        output_padding = " " * (len("Name") - len("Extension"))
+        #Obtain extensions from our Extension Process first.
+        click.echo("Please choose the obtain below to begin: ")
+        action = click.prompt(
+        "--begin - Begin the process of moving files first by obtaining a list of file extensions. B\n"
+        "--quit - Quit the Move command and return to the main menu.",
+        type = click.Choice(['--begin', '--quit'])
+        )
+
+        if action == "--begin":
+            print("This action will move files to the recycle bin!")
+            file_path = filedialog.askopenfilename()
+
+            if file_path: 
+                file_path = os.path.normpath(file_path)
+            send2trash.send2trash(file_path)  
+
+        elif action == "--quit":
+            # Create a new instance invoking that the user wants to end the program.
+            end_program = EndProgramProcess()
+            EndProgramProcess.end(self.directory_from)
+    
 
 if __name__ == "__main__":
     BeginProgram = MainMenu()
