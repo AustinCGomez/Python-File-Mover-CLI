@@ -5,6 +5,9 @@
 
 # Program Retirement
 Due to lack of interest in maintaining the program I have decided to archive it. I may take up this project at a later time in a different language with a cleaner UI or CLI. At the moment, I have no interest to continue to maintain the project. Version 0.3.5 is considered to be the last release of this project. The project may still be downloaded but it will no longer be actively worked on.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 This program provides a simple way to move massive amounts of files from one directory to another directory without having to manually go into your directories and move each file one by one. With PythonFileMover all you have to do is open up your command line and run our simple commands to move your files around on your computer with ease.  You can move massive amounts of files
 
