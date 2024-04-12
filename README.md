@@ -6,6 +6,8 @@ This program provides a simple way to move massive amounts of files from one dir
 
 Move massive amounts of files, either by extension(i.e. .txt ) or folder(i.e. WorkFiles) from one directory(I.E. C:/) to another directory (I.E. D:/) with only a few lines. Save yourself time from having to constantly copy and paste the files and get back to doing more important things!
 
+# Program Retirement
+Due to lack of interest in maintaining the program I have decided to archive it. I may take up this project at a later time in a different language with a cleaner UI or CLI. At the moment, I have no interest to continue to maintain the project. Version 0.3.5 is considered to be the last release of this project. 
 
 # Features
 - Move files from Directory A to Directory B with only a few commands.
