@@ -36,6 +36,43 @@ By running the `--move-files` command you will be able to move all files within 
 By running the `--move-folders` command you will be able to more entire folders(and folders within folders) with just a few clicks of a button.  Just select your two directories with our convenient GUI for selecting directories and type --begin to launch the program.
 
 
-# Contribute
-✨  We appreciate any and all help! Please take a look at our issue tab to see if there is any open issues. If you want to contribute to the project we are also open to hearing your ideas! Thank you in advance. ✨ 
+# Contributors
+
+We'd like to thank the following contributors for their hard work and support!
+
+## Contributors in a Square Layout
+
+<div align="center">
+  <table style="border: none;">
+    <tr>
+      <td align="center">
+        <img src="https://avatars.githubusercontent.com/u/USER_ID?v=4" width="100" height="100" alt="Contributor 1" style="border-radius: 50%;"><br>
+        <strong>Contributor 1</strong>
+      </td>
+      <td align="center">
+        <img src="https://avatars.githubusercontent.com/u/USER_ID?v=4" width="100" height="100" alt="Contributor 2" style="border-radius: 50%;"><br>
+        <strong>Contributor 2</strong>
+      </td>
+      <td align="center">
+        <img src="https://avatars.githubusercontent.com/u/USER_ID?v=4" width="100" height="100" alt="Contributor 3" style="border-radius: 50%;"><br>
+        <strong>Contributor 3</strong>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="https://avatars.githubusercontent.com/u/USER_ID?v=4" width="100" height="100" alt="Contributor 4" style="border-radius: 50%;"><br>
+        <strong>Contributor 4</strong>
+      </td>
+      <td align="center">
+        <img src="https://avatars.githubusercontent.com/u/USER_ID?v=4" width="100" height="100" alt="Contributor 5" style="border-radius: 50%;"><br>
+        <strong>Contributor 5</strong>
+      </td>
+      <td align="center">
+        <img src="https://avatars.githubusercontent.com/u/USER_ID?v=4" width="100" height="100" alt="Contributor 6" style="border-radius: 50%;"><br>
+        <strong>Contributor 6</strong>
+      </td>
+    </tr>
+  </table>
+</div>
+
 
