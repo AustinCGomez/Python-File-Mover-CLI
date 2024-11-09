@@ -16,9 +16,9 @@ Move massive amounts of files, either by extension(i.e. .txt ) or folder(i.e. Wo
 # How to Download
 ***Note: Currently Python File Mover is only compatible on Windows devices***
 Requirements: You will need to have GIT and PIP installed on your computer for our installation guide.
-Step 1: Clone the latest codebase from your github fork. | Git tutorial: https://rogerdudler.github.io/git-guide/ ✨
-Step 2: Install the dependencies using `pip -r requirements.txt` | PIP tutorial: https://www.w3schools.com/python/python_pip.asp✨
-Step 3: Run `python main.py` in the project directory and the project is now ready for use. ✨
+- Step 1: Clone the latest codebase from your github fork. | Git tutorial: https://rogerdudler.github.io/git-guide/ ✨
+- Step 2: Install the dependencies using `pip -r requirements.txt` | PIP tutorial: https://www.w3schools.com/python/python_pip.asp✨
+- Step 3: Run `python main.py` in the project directory and the project is now ready for use. ✨
 
 # Tutorial
  You will then be led to our very intuitive interactive mode! From the interactive mode, you can do the following
