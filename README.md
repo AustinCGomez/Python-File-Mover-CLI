@@ -38,15 +38,7 @@ By running the `--move-folders` command you will be able to more entire folders(
 
 
 # Contribute
-We would love any and all help on the project. The maintainer has listed out in the 'issues' tab many different enhancement ideas and discovered bugs. You are welcome to pick any of the issues to work on if you wish to dedicate your time to it. If you are confused on the issue and want more information then please feel free to also leave a comment.
-  ### How to contribute?
-  You must submit your code through your own fork as a pull request comparing the two forks. The steps have been detailed below for further understanding:
-    - Step 1: Fork the distribution to your Github. Your fork is your own personal copy of the project.
-    - Step 2: Work on your software enhancement/bug fix and push it to your own Github Repo of Python File Mover CLI.
-    - Step 3: Mention the issue/enhancement in your pull request comment so that the maintainers are aware.
-    - Step 4: Review Process) Wait for the maintainers to review and write test cases for your submission.
-    - Steph 5: If approved: Congratulations! If not approved: Please do not be discouraged. We will help you in the best way possible.
-
+Our maintainer is currently building a GUI interface to define future iterations of this project. Code contributions will be halted till the GUI is developed as there will be extensive changes to the code base and overal structure of the program. Bug reports are still appreciated and also documentation improvements. We expect the new GUI to be released around late November 2024.
 
 
 ### Want to report bugs or ask for additional features?  
