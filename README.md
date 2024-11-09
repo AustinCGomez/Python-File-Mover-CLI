@@ -46,7 +46,7 @@ We'd like to thank the following contributors for their hard work and support!
   <table style="border: none;">
     <tr>
       <td align="center">
-        <img src="https://avatars.githubusercontent.com/u/USER_ID?v=4" width="100" height="100" alt="Contributor 1" style="border-radius: 50%;"><br>
+        <img src="https://avatars.githubusercontent.com/u/7500568?v=4" width="100" height="100" alt="Contributor 1" style="border-radius: 50%;"><br>
         <strong>Contributor 1</strong>
       </td>
       <td align="center">
