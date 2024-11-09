@@ -37,7 +37,7 @@ By running the `--move-folders` command you will be able to more entire folders(
 
 
 # Contributors
-Project maintainer: 
+Thank you to all contributors to this project. It is with your time and effort that makes open source software great and heartwarming experience.
 <div align="center">
   <table style="border: none;">
     <tr>
@@ -45,9 +45,7 @@ Project maintainer:
         <img src="https://avatars.githubusercontent.com/u/7500568?v=4" width="100" height="100" alt="Contributor 1" style="border-radius: 50%;"><br>
         <strong>Austin Gomez(AustinCGomez)</strong>
       </td>
-Thank you to all contributors to this project. It is with your time and effort that makes open source software great and heartwarming experience.
 <div align="center">
-  <table style="border: none;">
     <tr>
       <td align="center">
         <img src="https://avatars.githubusercontent.com/u/51723422?v=4" width="100" height="100" alt="Contributor 1" style="border-radius: 50%;"><br>
