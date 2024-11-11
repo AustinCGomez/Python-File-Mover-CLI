@@ -16,9 +16,9 @@ Move massive amounts of files, either by extension(i.e. .txt ) or folder(i.e. Wo
 # How to Download
 ***Note: Currently Python File Mover is only compatible on Windows devices***
 Requirements: You will need to have GIT and PIP installed on your computer for our installation guide.
-Step 1: Clone the latest codebase from your github fork. | Git tutorial: https://rogerdudler.github.io/git-guide/ ✨
-Step 2: Install the dependencies using `pip -r requirements.txt` | PIP tutorial: https://www.w3schools.com/python/python_pip.asp✨
-Step 3: Run `python main.py` in the project directory and the project is now ready for use. ✨
+- Step 1: Clone the latest codebase from your github fork. | Git tutorial: https://rogerdudler.github.io/git-guide/ ✨
+- Step 2: Install the dependencies using `pip install -r requirements.txt` | PIP tutorial: https://www.w3schools.com/python/python_pip.asp✨
+- Step 3: Run `python main.py` in the project directory and the project is now ready for use. ✨
 
 # Tutorial
  You will then be led to our very intuitive interactive mode! From the interactive mode, you can do the following
@@ -36,6 +36,35 @@ By running the `--move-files` command you will be able to move all files within 
 By running the `--move-folders` command you will be able to more entire folders(and folders within folders) with just a few clicks of a button.  Just select your two directories with our convenient GUI for selecting directories and type --begin to launch the program.
 
 
-# Contribute
-✨  We appreciate any and all help! Please take a look at our issue tab to see if there is any open issues. If you want to contribute to the project we are also open to hearing your ideas! Thank you in advance. ✨ 
+# Contributors
+Thank you to all contributors to this project. It is with your time and effort that makes open source software great and heartwarming experience.
+<div align="center">
+  <table style="border: none;">
+    <tr>
+      <td align="center">
+        <img src="https://avatars.githubusercontent.com/u/7500568?v=4" width="100" height="100" alt="Contributor 1" style="border-radius: 50%;"><br>
+        <strong>Austin Gomez(AustinCGomez)</strong>
+      </td>
+<div align="center">
+    <tr>
+      <td align="center">
+        <img src="https://avatars.githubusercontent.com/u/51723422?v=4" width="100" height="100" alt="Contributor 1" style="border-radius: 50%;"><br>
+        <strong>Sorena(sorena-dev)</strong>
+      </td>
+      <td align="center">
+        <img src="https://avatars.githubusercontent.com/u/37051110?v=4" width="100" height="100" alt="Contributor 2" style="border-radius: 50%;"><br>
+        <strong>Mudassir Chapra(muddi900)</strong>
+      </td>
+      <td align="center">
+        <img src="https://avatars.githubusercontent.com/u/90431210?v=4" width="100" height="100" alt="Contributor 3" style="border-radius: 50%;"><br>
+        <strong>Austin Burdette(burd5)</strong>
+      </td>
+     <td align="center">
+        <img src="https://avatars.githubusercontent.com/u/66977282?v=4" width="100" height="100" alt="Contributor 3" style="border-radius: 50%;"><br>
+        <strong>malikrohail(malikrohail)</strong>
+      </td>
+  </table>
+</div>
+
+
 

@@ -1,4 +1,3 @@
-
 '''
 MIT LICENSE
 Copyright (c) [2023] [Austin Christopher Galindo Gomez]
@@ -179,16 +178,14 @@ class MoveFilesCommand():
 
     def process_move(self):
         output_padding = " " * (len("Name") - len("Extension"))
-        #Obtain extensions from our Extension Process first.
         click.echo("Please choose the obtain below to begin: ")
         action = click.prompt(
-        "--begin - Begin the process of moving files first by obtaining a list of file extensions. B\n"
-        "--quit - Quit the Move command and return to the main menu.",
-        type = click.Choice(['--begin', '--quit'])
+            "--begin - Begin the process of moving files first by obtaining a list of file extensions. B\n"
+            "--quit - Quit the Move command and return to the main menu.",
+            type = click.Choice(['--begin', '--quit'])
         )
 
         if action == "--begin":
-            #create new instance to create file extension page.
             retrieve_file_extensions = ObtainFileExtensionListProcess(self.user_extensions)
             self.user_extensions = retrieve_file_extensions.obtain_file_list()
             print(" ")
@@ -199,26 +196,25 @@ class MoveFilesCommand():
             time.sleep(2)
             print("ATTEMPTING to move files based on extension from Directory A to Directory B")
             time.sleep(1)
-            # Compare extensions user entered to extensions in from folder. If ext is missing from folder,
-            # ask user to reenter extension names
-            for ext in self.user_extensions:
-                from_file_ext = [os.path.splitext(file)[-1].lstrip('.') for file in os.listdir(self.directory_from)]
-                # if directory is empty, have user reselect new directories
-                if not from_file_ext or from_file_ext == ['']:
-                    print(f'The directory {self.directory_from} is empty. Please pick a directory that is not empty.\n')
-                    GatherDirectoriesProcess.obtain_dirs(self)
-                if ext.lstrip('.') not in from_file_ext:
+
+            # Normalize user extensions to lowercase
+            normalized_extensions = [ext.lower() for ext in self.user_extensions]
+
+            # Check for files in the source directory
+            from_file_ext = [os.path.splitext(file)[-1].lstrip('.').lower() for file in os.listdir(self.directory_from)]
+            for ext in normalized_extensions:
+                if ext not in from_file_ext:
                     print(f'{ext} extension not found in directory {self.directory_from}. Please reenter the extension names.\n')
                     self.process_move()
+
             for file in os.listdir(self.directory_from):
-                if any(file.endswith(ext) for ext in self.user_extensions):
+                if any(file.lower().endswith(ext) for ext in normalized_extensions):  # Normalize case
                     src_path = os.path.join(self.directory_from, file)
                     dest_path = os.path.join(self.directory_to, file)
                     shutil.move(src_path, dest_path)
                     print(f"Name: {file}{output_padding} - Removed From: {src_path} and moved to: {dest_path}")
                     print(" ")
         elif action == "--quit":
-            # Create a new instance invoking that the user wants to end the program.
             end_program = EndProgramProcess()
             EndProgramProcess.end(self.directory_from)
 
