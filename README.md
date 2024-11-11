@@ -59,6 +59,10 @@ Thank you to all contributors to this project. It is with your time and effort t
         <img src="https://avatars.githubusercontent.com/u/90431210?v=4" width="100" height="100" alt="Contributor 3" style="border-radius: 50%;"><br>
         <strong>Austin Burdette(burd5)</strong>
       </td>
+     <td align="center">
+        <img src="https://avatars.githubusercontent.com/u/66977282?v=4" width="100" height="100" alt="Contributor 3" style="border-radius: 50%;"><br>
+        <strong>malikrohail(malikrohail)</strong>
+      </td>
   </table>
 </div>
 
