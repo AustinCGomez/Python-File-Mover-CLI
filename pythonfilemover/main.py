@@ -1,6 +1,6 @@
 '''
 MIT LICENSE
-Copyright (c) [2023] [Austin Christopher Galindo Gomez]
+Copyright (c) [2024] [Austin Gomez]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,14 +32,13 @@ from art import *
 import send2trash
 
 ''' Static functions that give some information about our program'''
-LOGO = text2art("Python FIle Mover")
+LOGO = text2art("Python File Mover")
 GOODBYE = text2art("GOODBYE")
 CONTRIBUTE = ("Want additional features? Spotted a bug? Head to our Github and lend a helping hand :) ->  https://github.com/AustinCGomez/Python-File-Mover-CLI")
-VERSION = "Version 0.3.5."
+VERSION = "Version 0.3.5.1"
 LICENSE = "This software is published under the MIT License."
 AUTHOR = "Program designed and Authored by Austin Gomez."
-WARNING = "!!WARNING!! This command will DELETE files from Directory A and move them to DIRECTORY B."
-
+WARNING = "OK"
 
 
 class DirectoryStructureInfoProcess():
@@ -75,20 +74,29 @@ class GatherDirectoriesProcess():
     def process_error_handling(self, error_reason):
         print(f"Please re-enter the directories so that they are not {error_reason}")
     def obtain_dirs(self):
-        print("Please select two directories from your computer system!")
-        time.sleep(2)
+        print("Please choose the source directory from which files will be moved via the Graphical User Interface.")
+        print(" ")
+        print("Opening the graphical user interface just one moment.")
+        time.sleep(1)
         self.directory_from = filedialog.askdirectory()
+        print("Directory selected!")
+        print(" ")
+        time.sleep(1)
+        print("Please choose the destination directory from which files will be moved via the Graphical User Interface.")
+        print(" ")
+        print("Opening the graphical user interface just one moment")
         self.directory_to = filedialog.askdirectory()
         while not self.directory_from:
             self.directory_from = filedialog.askdirectory()
             if not self.directory_from:
-                print("Error: Please define an FROM directory.")
+                print("You will need to define a source folder before we can move forward.")
                 time.sleep(2)
         while not self.directory_to:
             self.directory_to = filedialog.askdirectory()
             time.sleep(2)
             if not self.directory_to:
-                print("Error: Please define an TO directory.")
+                print("You will need to define a destination folder before we can move forward.")
+                time.sleep(2)
 
         if self.directory_from == self.directory_to:
             print("Error: Directory TO and Directory FROM cannot be the same!")
@@ -145,16 +153,20 @@ class MainMenu():
         action = click.prompt(
         "--move-files - Move files by specific file extension from Directory A to Directory B!\n"
         "--move-folders - Move Entire Folders from Directory A to Directory B!\n"
-        "--move-to-recycle-bin - Move file to the recycle bin!",
-        type = click.Choice(['--move-files', '--move-folders', '--move-to-recycle-bin'])
+        "--move-to-recycle-bin - Move file to the recycle bin!\n",
+        "--quit - Exit out of the program",
+        type = click.Choice(['--move-files', '--move-folders', '--move-to-recycle-bin', '--quit'])
         )
 
-        if action == "--move-files":
+        if action == "--move-files".lower():
             self.move_files_by_extension()
         elif action == "--move-folders":
             self.move_entire_folders()
         elif action == '--move-to-recycle-bin':
             self.move_to_recycle_bin()
+        elif action == '--quit':
+            QuitProgram = EndProgramProcess()
+            QuitProgram.end()
     def move_to_recycle_bin(self):
         new_file_move = MoveFilesToTrashCommand(self.file_path)
         new_file_move.process_move()
@@ -229,6 +241,10 @@ class MoveFilesCommand():
         display_dir_info.showFiles(self.directory_from, self.directory_to)
         self.process_move()
 
+class MoveCategoriesCommand():
+    def __init__(self, dir_a, dir_b):
+        self.directory_from = None
+        self.directory_to = None
 
 class MoveFoldersCommand():
     def __init__(self, dir_a, dir_b):
@@ -236,13 +252,32 @@ class MoveFoldersCommand():
         self.directory_to = None
         self.user_extensions = []
     def process_file_move(self):
-        print(WARNING)
         verify_directories = GatherDirectoriesProcess(self.directory_from, self.directory_to)
+        #We will attempt to verify our directories to make sure that the user entered them in correctly.
         self.directory_from, self.directory_to = verify_directories.obtain_dirs()
         display_folder_info = DirectoryStructureInfoProcess("blank")
         display_folder_info.showFolders(self.directory_from, self.directory_to)
         shutil.move(self.directory_from, self.directory_to)
         print(f"SUCCESS: The Folder has been moved from {self.directory_from} to {self.directory_to}")
+        print(" ")
+        click.echo("Do you want to move more folders?")
+        action = click.prompt( 
+            "--no\n"
+            "--yes",
+        type = click.Choice(['--no', '--yes'])
+        )
+        if action == "--no":
+            print("Sending you back to main menu..")
+            time.sleep(1)
+            print("One moment...reinitilizing")
+            StartAgain = MainMenu()
+            StartAgain.main()
+            time.sleep(1)
+        elif action == "--yes":
+            print("One moment...reinitilizing")
+            time.sleep(1)
+            self.process_file_move()
+
 
 class MoveFilesToTrashCommand():
     def __init__(self, file_path):
