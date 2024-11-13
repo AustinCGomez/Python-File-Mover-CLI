@@ -36,8 +36,8 @@ By running the `--move-files` command you will be able to move all files within 
 By running the `--move-folders` command you will be able to more entire folders(and folders within folders) with just a few clicks of a button.  Just select your two directories with our convenient GUI for selecting directories and type --begin to launch the program.
 
 
-# Contributors
-Thank you to all contributors to this project. It is with your time and effort that makes open source software great and heartwarming experience.
+# Contribute
+A sincere thank you to all contributors to this project. It doesn't matter if you are simply changing some grammar in our readme or submitting code. All contributions are welcome and that is what make open source software great!
 <div align="center">
   <table style="border: none;">
     <tr>
@@ -65,6 +65,9 @@ Thank you to all contributors to this project. It is with your time and effort t
       </td>
   </table>
 </div>
+
+## How to contribute? 
+If you'd like to contribute to our project, please take a look at the open issues. As the maintainer, I’m always on the lookout for bugs to fix and will tag them accordingly. If you have an idea for a new feature or improvement, it's recommended to open an issue first. This way, the maintainer can review and approve the idea before you submit a pull request, helping to avoid any potential rejections.
 
 
 
