@@ -3,9 +3,8 @@
 # Version 0.3.5.1
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
-This program provides a simple way to move massive amounts of files from one directory to another directory without having to manually go into your directories and move each file one by one. With PythonFileMover all you have to do is open up your command line and run our simple commands to move your files around on your computer with ease.  You can move massive amounts of files
+Have you ever looked through your download folder(or any other folder) on your computer and decided you don’t want to really go through everything to decide what you want to delete? Well, now you do not have too! Python File Mover was created just for this idea. Quite literally, the project maintainer @AustinCGomez got tired of having to do this minimally annoying task, and so he decided to write up some code to automate it a bit. Instead of keeping the code to himself, he decided to dedicate it to the public domain to see if anyone may also have this problem. 
 
-Move massive amounts of files, either by extension(i.e. .txt ) or folder(i.e. WorkFiles) from one directory(I.E. C:/) to another directory (I.E. D:/) with only a few lines. Save yourself time from having to constantly copy and paste the files and get back to doing more important things!
 
 
 
