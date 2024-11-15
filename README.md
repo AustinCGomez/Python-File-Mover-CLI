@@ -3,7 +3,7 @@
 # Version 0.3.5.1
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
-Have you ever looked through your download folder(or any other folder) on your computer and decided you don’t want to really go through everything to decide what you want to delete? Well, now you do not have too! Python File Mover was created just for this idea. Quite literally, the project maintainer @AustinCGomez got tired of having to do this minimally annoying task, and so he decided to write up some code to automate it a bit. Instead of keeping the code to himself, he decided to dedicate it to the public domain to see if anyone may also have this problem. 
+Have you ever looked through your download folder(or any other folder) on your computer and decided you don’t want to really go through everything to decide what you want to delete? Well, now you do not have too! Python File Mover was created just for this idea. Quite literally, the project maintainer got tired of having to do this minimally annoying task, and so he decided to write up some code to automate it a bit. Instead of keeping the code to himself, he decided to dedicate it to the public domain to see if anyone may also have this problem. 
 
 
 
