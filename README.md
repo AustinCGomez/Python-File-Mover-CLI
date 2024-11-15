@@ -1,9 +1,19 @@
 ![alt text](https://i.imgur.com/z1ogxT9.png)
-
-# Version 0.3.5.1
+### Python File Mover: The Ultimate Solution to Avoiding File Management
+### Version 0.3.5.1
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
-Have you ever looked through your download folder(or any other folder) on your computer and decided you don’t want to really go through everything to decide what you want to delete? Well, now you do not have too! Python File Mover was created just for this idea. Quite literally, the project maintainer got tired of having to do this minimally annoying task, and so he decided to write up some code to automate it a bit. Instead of keeping the code to himself, he decided to dedicate it to the public domain to see if anyone may also have this problem. 
+
+Ever open your downloads folder—or any other folder on your computer—and immediately feel your soul start to shrivel at the thought of sorting through it? Well, now you don’t have to!
+
+**Introducing Python File Mover** — the app that solves the **grueling** task of choosing which files to delete. Because let’s face it, we’ve all spent way too many hours pretending to care about files like:
+
+- **IMG_432.jpg**
+- **Document_4_final_draft_FINAL_v2.pdf**
+
+With *Python File Mover*, you can just… **not**. It does all the heavy lifting for you, so you can go back to the important work of binge-watching Netflix without the burden of an organized file system.
+
+> **It’s the automation we never knew we needed, but absolutely deserve.**
 
 
 
